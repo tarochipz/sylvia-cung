@@ -4,13 +4,9 @@ import Masonry from "@mui/lab/Masonry";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
-export const Gallery = ({
-  itemData,
-}: {
-  itemData: { img: string; title: string }[];
-}) => {
+export const Gallery = ({ itemData }: { itemData: string[] }) => {
   const [open, setOpen] = React.useState(false);
-  const [activeImage, setActiveImage] = React.useState();
+  const [activeImage, setActiveImage] = React.useState<string>();
 
   const style = {
     position: "absolute",
@@ -19,6 +15,8 @@ export const Gallery = ({
     transform: "translate(-50%, -50%)",
     minWidth: "450",
   };
+
+  console.log("itemData", itemData);
 
   return (
     <>
@@ -29,21 +27,19 @@ export const Gallery = ({
       </Modal>
       {/* <h1>Portraits</h1> */}
       <Masonry columns={3} spacing={2}>
-        {itemData.map((item) => (
+        {itemData && itemData.map((item) => (
           <ImageListItem
             onClick={() => {
               setOpen(true);
-            //   setActiveImage(
-            //     `${item.baseUrl}=w${item.mediaMetadata.width}-h${item.mediaMetadata.height}`
-            //   );
+              setActiveImage(`${item}`);
             }}
             // key={item.id}
           >
-            {/* <img
-              src={`${item.baseUrl}=w${item.mediaMetadata.width}-h${item.mediaMetadata.height}`}
-              alt={item.filename}
+            <img
+              src={`${item}`}
+              // alt={item.filename}
               loading="lazy"
-            /> */}
+            />
           </ImageListItem>
         ))}
       </Masonry>

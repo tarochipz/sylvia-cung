@@ -1,30 +1,29 @@
 import React from "react";
 import { Gallery } from "../../sharedComponents/gallery";
-import { itemData } from "./testImageData";
+
+type imageType = "food" | "landscape" | "portraits";
 
 export const Photography = () => {
-  const [images, setImages] = React.useState([]);
+  const [imageUrls, setImageUrls] = React.useState([]);
 
-  const fetchImages = async () => {
+  const fetchImages = async (imageType: imageType) => {
     var requestOptions = {
       method: "GET",
     };
 
-    fetch("/api/photos", requestOptions)
+    fetch(`/api/photos/?imageType=${imageType}`, requestOptions)
       .then((response) => {
-        console.log("RESPONSE:", response);
         return response.json();
       })
       .then((result) => {
-        console.log("RESULT:", result);
-        setImages(result.mediaItems);
+        setImageUrls(result.fileURLs);
       })
       .catch((error) => console.log("error", error));
   };
 
   React.useEffect(() => {
-    fetchImages();
+    fetchImages("portraits");
   }, []);
 
-  return <Gallery itemData={itemData} />;
+  return <Gallery itemData={imageUrls} />;
 };

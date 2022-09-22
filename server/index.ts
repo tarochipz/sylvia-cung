@@ -1,7 +1,5 @@
 const express = require("express");
 const path = require("path");
-//@ts-ignore
-const { Storage } = require("@google-cloud/storage");
 
 const app = express();
 const port = process.env.PORT || 9090;
@@ -12,34 +10,31 @@ const BUCKET_NAME = "sylviacung-images";
 
 app.use(express.static(DIST_DIR));
 
-app.get("/api/photos", async (_req: any, res: any) => {
-  const fileURLs: any[] = [];
-  const gcstorage = new Storage();
+app.get("/api/photos", async (req: any, res: any) => {
+  const imageType = req.query.imageType;
+  const fileURLs: string[] = [];
+  const { Storage } = require("@google-cloud/storage");
+
+  // Create client from a Google service account key
+  const gcstorage = new Storage({
+    keyFilename: "/Users/sylvia/Desktop/gcs-admin-service-account.json",
+  });
   const [files] = await gcstorage
     .bucket(BUCKET_NAME)
-    .getFiles({ prefix: "/portraits" }); //folder name
-  console.log("Files:");
+    .getFiles({ prefix: imageType }); //folder name
 
   files.forEach((file: any) => {
-    console.log(file.name);
-    const fileRef = gcstorage.bucket(BUCKET_NAME).file(file.name);
-    const config = { action: "read" };
-    fileRef.getSignedUrl(config, function (err: any, url: any) {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      fileURLs.push(url);
-      console.log("Url is : " + url);
-    });
+    const fileUrl = `https://storage.googleapis.com/sylviacung-images/${file.name}`;
+    fileURLs.push(fileUrl);
   });
-  return res.send(fileURLs);
+  return res.json({ fileURLs: fileURLs.slice(1) });
 });
 
 //@ts-ignore
 app.get("/", (_req, res) => {
   res.sendFile(HTML_FILE);
 });
+
 app.listen(port, function () {
   console.log("App listening on port: " + port);
 });
