@@ -13,6 +13,7 @@ const IconStyle = {
   paddingRight: "15px",
   display: "inline",
   "&:hover": {
+    //TODO: this doesn't work use stylesheets or styled-components
     color: "#ff9e9e",
     transform: "rotate(180deg)",
     cursor: "pointer",
@@ -29,12 +30,13 @@ const MenuStyle = {
   margin: "0",
   padding: "0",
   marginLeft: "auto",
-  "&:> a": {
-    padding: "15px",
-    color: "red",
-    textDecoration: "none",
-  },
-  "&:> a:hover": {
+};
+
+const LinkStyle = {
+  padding: "15px",
+  color: "red",
+  textDecoration: "none",
+  "&:hover": {
     textDecoration: "underline",
   },
 };
@@ -67,17 +69,17 @@ export const NavBar = () => {
         </div>
         {/* @ts-ignore */}
         <ul style={MenuStyle}>
-          <Link to="/">
+          <Link style={LinkStyle} to="/">
             <li>Home</li>
           </Link>
           {/* TODO: add scroll animation */}
-          <HashLink to="/#about">
+          <HashLink style={LinkStyle} to="/#about">
             <li>About</li>
           </HashLink>
           {/* <HashLink to="/#resume">
                 <li>Resume</li>
               </HashLink> */}
-          <Link to="/photography">
+          <Link style={LinkStyle} to="/photography">
             <li>Photography</li>
           </Link>
           {/* <a href="#">

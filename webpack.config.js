@@ -12,6 +12,9 @@ module.exports = {
   },
   devServer: {
     static: "./dist",
+    proxy: {
+      '/api': 'http://localhost:9090',
+    },
   },
   plugins: [htmlPlugin],
   module: {
