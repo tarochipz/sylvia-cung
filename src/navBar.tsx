@@ -20,7 +20,7 @@ const IconStyle = {
 };
 
 const MenuStyle = {
-  fontFamily: "Inconsolata", // monospace;
+  fontFamily: "Inconsolata",
   textTransform: "uppercase",
   fontWeight: "bold",
   display: "flex",
