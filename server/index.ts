@@ -1,37 +1,51 @@
-const express = require("express");
-const path = require("path");
+import express from "express";
+import path from "path";
+import { Storage } from "@google-cloud/storage";
 
 const app = express();
 const port = process.env.PORT || 9090;
-const DIST_DIR = path.join(__dirname, "../dist");
+const __dirname = path.resolve();
+const DIST_DIR = path.join(__dirname, "./dist");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
 
-const BUCKET_NAME = "sylviacung-images";
+const GCS_BUCKET_NAME = "sylviacung-images";
 
-app.use(express.static(DIST_DIR));
+// app.use(express.static(DIST_DIR));
+
+export interface Image {
+  id: string;
+  fileName: string;
+  fileUrl: string;
+  loaded: boolean
+}
+export type ImageType = "food" | "landscape" | "portraits";
 
 app.get("/api/photos", async (req: any, res: any) => {
-  const imageType = req.query.imageType;
-  const fileURLs: string[] = [];
-  const { Storage } = require("@google-cloud/storage");
+  const imageType: ImageType = req.query.imageType;
+  const fileURLs: Image[] = [];
 
   // Create client from a Google service account key
   const gcstorage = new Storage({
-    keyFilename: "/Users/sylvia/Desktop/gcs-admin-service-account.json",
+    keyFilename: "./secrets/gcs-admin-service-account.json",
   });
   const [files] = await gcstorage
-    .bucket(BUCKET_NAME)
+    .bucket(GCS_BUCKET_NAME)
     .getFiles({ prefix: imageType }); //folder name
 
   files.forEach((file: any) => {
-    const fileUrl = `https://storage.googleapis.com/sylviacung-images/${file.name}`;
-    fileURLs.push(fileUrl);
+    const imageData: Image = {
+      id: file.metadata.id,
+      fileName: file.name,
+      fileUrl: `https://storage.googleapis.com/sylviacung-images/${file.name}`,
+      loaded: false
+    };
+    fileURLs.push(imageData);
   });
-  return res.json({ fileURLs: fileURLs.slice(1) });
+  return res.json(fileURLs.slice(1));
 });
 
 //@ts-ignore
-app.get("/", (_req, res) => {
+app.get("/*", (_req, res) => {
   res.sendFile(HTML_FILE);
 });
 

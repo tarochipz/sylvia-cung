@@ -1,12 +1,14 @@
 import * as React from "react";
-import ImageListItem from "@mui/material/ImageListItem";
 import Masonry from "@mui/lab/Masonry";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Image } from "../../server";
+import { GalleryImage } from "./galleryImage";
 
-export const Gallery = ({ itemData }: { itemData: string[] }) => {
+export const Gallery = ({ images }: { images: Image[] }) => {
   const [open, setOpen] = React.useState(false);
-  const [activeImage, setActiveImage] = React.useState<string>();
+  const [activeImage, setActiveImage] = React.useState<Image>();
 
   const style = {
     position: "absolute",
@@ -15,34 +17,32 @@ export const Gallery = ({ itemData }: { itemData: string[] }) => {
     transform: "translate(-50%, -50%)",
     minWidth: "450",
   };
-
-  console.log("itemData", itemData);
-
   return (
     <>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={{ ...style }}>
-          <img style={{ width: "100%", height: "100%" }} src={activeImage} />
+          <img
+            style={{ width: "100%", height: "100%" }}
+            src={activeImage?.fileUrl}
+          />
         </Box>
       </Modal>
-      {/* <h1>Portraits</h1> */}
-      <Masonry columns={3} spacing={2}>
-        {itemData && itemData.map((item) => (
-          <ImageListItem
-            onClick={() => {
-              setOpen(true);
-              setActiveImage(`${item}`);
-            }}
-            // key={item.id}
-          >
-            <img
-              src={`${item}`}
-              // alt={item.filename}
-              loading="lazy"
+      {/* <h1 style={{}}>Portraits</h1> */}
+      {images && images.length > 0 ? (
+        <Masonry columns={3} spacing={2}>
+          {images.map((image) => (
+            <GalleryImage
+              image={image}
+              setOpen={setOpen}
+              setActiveImage={setActiveImage}
             />
-          </ImageListItem>
-        ))}
-      </Masonry>
+          ))}
+        </Masonry>
+      ) : (
+      <Box sx={{textAlign: 'center', padding: '25%'}}>
+        <CircularProgress sx={{color: 'red'}} />
+      </Box>
+      )}
     </>
   );
 };

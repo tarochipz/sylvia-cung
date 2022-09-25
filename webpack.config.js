@@ -1,10 +1,12 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require("path");
+import HtmlWebPackPlugin from "html-webpack-plugin";
+import path from "path";
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html",
   filename: "./index.html",
 });
-module.exports = {
+const __dirname = path.resolve();
+
+export default {
   entry: "./src/index.tsx",
   output: {
     path: path.join(__dirname, "dist"),
@@ -13,7 +15,7 @@ module.exports = {
   devServer: {
     static: "./dist",
     proxy: {
-      '/api': 'http://localhost:9090',
+      "/api": "http://localhost:9090",
     },
   },
   plugins: [htmlPlugin],

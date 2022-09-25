@@ -1,12 +1,11 @@
 import React from "react";
+import { Image, ImageType } from "../../../server";
 import { Gallery } from "../../sharedComponents/gallery";
 
-type imageType = "food" | "landscape" | "portraits";
-
 export const Photography = () => {
-  const [imageUrls, setImageUrls] = React.useState([]);
+  const [images, setImages] = React.useState([]);
 
-  const fetchImages = async (imageType: imageType) => {
+  const fetchImages = async (imageType: ImageType) => {
     var requestOptions = {
       method: "GET",
     };
@@ -15,8 +14,8 @@ export const Photography = () => {
       .then((response) => {
         return response.json();
       })
-      .then((result) => {
-        setImageUrls(result.fileURLs);
+      .then((result: Image[]) => {
+        setImages(result);
       })
       .catch((error) => console.log("error", error));
   };
@@ -25,5 +24,5 @@ export const Photography = () => {
     fetchImages("portraits");
   }, []);
 
-  return <Gallery itemData={imageUrls} />;
+  return <Gallery images={images} />;
 };

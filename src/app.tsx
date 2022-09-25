@@ -29,7 +29,7 @@ export const App = () => {
       </div>
       <Routes>
         <Route path="/photography" element={<Photography />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/*" element={<Home />} />
       </Routes>
       <Footer />
     </div>

@@ -13,9 +13,8 @@ const IconStyle = {
   paddingRight: "15px",
   display: "inline",
   "&:hover": {
-    //TODO: this doesn't work use stylesheets or styled-components
     color: "#ff9e9e",
-    transform: "rotate(180deg)",
+    transform: "rotate(360deg)",
     cursor: "pointer",
   },
 };
@@ -38,11 +37,12 @@ const LinkStyle = {
   textDecoration: "none",
   "&:hover": {
     textDecoration: "underline",
+    color: "#ff9e9e",
   },
 };
 
 const LogoStyle = {
-  fontFamily: "Raleway", //sans-serif;
+  fontFamily: "Raleway",
   fontWeight: "200",
   fontSize: "22px",
   color: "red",
@@ -55,16 +55,16 @@ export const NavBar = () => {
         <h1 style={LogoStyle}>SC</h1>
         <div style={{ paddingLeft: "10px" }}>
           <a href="https://www.linkedin.com/in/sylviacung/" target="_blank">
-            <LinkedInIcon style={IconStyle} />
+            <LinkedInIcon sx={IconStyle} fontSize={"small"} />
           </a>
           <a href="https://github.com/tarochipz" target="_blank">
-            <GitHubIcon style={IconStyle} />
+            <GitHubIcon sx={IconStyle} fontSize={"small"} />
           </a>
           <a href="https://www.instagram.com/tarochipz/" target="_blank">
-            <InstagramIcon style={IconStyle} />
+            <InstagramIcon sx={IconStyle} fontSize={"small"} />
           </a>
           <a href="mailto:sylvcung@gmail.com" target="_blank">
-            <MailOutlineIcon style={IconStyle} />
+            <MailOutlineIcon sx={IconStyle} fontSize={"small"} />
           </a>
         </div>
         {/* @ts-ignore */}
