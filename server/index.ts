@@ -24,8 +24,8 @@ export interface Image {
 }
 export type ImageType = "food" | "landscape" | "portraits";
 
-app.get("/api/photos", async (req: any, res: any) => {
-  const imageType: ImageType = req.query.imageType;
+app.get("/api/photos", async (req: express.Request, res: express.Response) => {
+  const imageType: ImageType = req.query.imageType as ImageType;
   const fileURLs: Image[] = [];
   const gcstorage = new Storage({
     projectId,
