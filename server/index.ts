@@ -15,7 +15,6 @@ const projectId = process.env.GCS_PROJECT_ID
 const client_email = process.env.GCS_CLIENT_EMAIL;
 const private_key = process.env.GCS_PRIVATE_KEY //https://github.com/googleapis/google-cloud-node/issues/1173#issuecomment-199183259
 
-// app.use(express.static(DIST_DIR));
 export interface Image {
   id: string;
   fileName: string;
@@ -55,6 +54,9 @@ app.get("/api/photos", async (req: express.Request, res: express.Response) => {
 app.get("/*", (_req, res) => {
   res.sendFile(HTML_FILE);
 });
+
+app.use(express.static(DIST_DIR));
+
 
 app.listen(port, function () {
   console.log("App listening on port: " + port);
