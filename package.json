@@ -5,6 +5,8 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
+    "heroku-prebuild": "npm install --dev",
+    "heroku-postbuild": "webpack -p",
     "start": "nodemon --exec 'node --loader ts-node/esm' server/index.ts",
     "dev": "webpack-dev-server --mode development --hot && node server/index.ts",
     "build": "webpack --mode production",
