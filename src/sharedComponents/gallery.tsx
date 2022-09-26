@@ -29,7 +29,7 @@ export const Gallery = ({ images }: { images: Image[] }) => {
       </Modal>
       {/* <h1 style={{}}>Portraits</h1> */}
       {images && images.length > 0 ? (
-        <Masonry columns={3} spacing={2}>
+        <Masonry columns={{lg:3, md:2}} spacing={2}>
           {images.map((image) => (
             <GalleryImage
               image={image}
