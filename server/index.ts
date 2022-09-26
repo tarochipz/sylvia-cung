@@ -15,6 +15,11 @@ const projectId = process.env.GCS_PROJECT_ID
 const client_email = process.env.GCS_CLIENT_EMAIL;
 const private_key = process.env.GCS_PRIVATE_KEY //https://github.com/googleapis/google-cloud-node/issues/1173#issuecomment-199183259
 
+console.log('projectId',projectId)
+console.log('client_email',client_email)
+console.log('private_key',private_key)
+
+
 export interface Image {
   id: string;
   fileName: string;
