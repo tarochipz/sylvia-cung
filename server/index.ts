@@ -23,6 +23,8 @@ export interface Image {
 }
 export type ImageType = "food" | "landscape" | "portraits";
 
+app.use(express.static(DIST_DIR));
+
 app.get("/api/photos", async (req: express.Request, res: express.Response) => {
   const imageType: ImageType = req.query.imageType as ImageType;
   const fileURLs: Image[] = [];
@@ -51,12 +53,9 @@ app.get("/api/photos", async (req: express.Request, res: express.Response) => {
 });
 
 //@ts-ignore
-app.get("/*", (_req, res) => {
-  res.sendFile(HTML_FILE);
+app.get("*", (_req, res: express.Response) => {
+  return res.sendFile(HTML_FILE);
 });
-
-app.use(express.static(DIST_DIR));
-
 
 app.listen(port, function () {
   console.log("App listening on port: " + port);
