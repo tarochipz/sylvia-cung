@@ -3,6 +3,8 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 //@ts-ignore
 import { HashLink } from "react-router-hash-link";
@@ -49,6 +51,14 @@ const LogoStyle = {
 };
 
 export const NavBar = () => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   {
     return (
       <div style={{ width: "100%", display: "flex", alignItems: "center" }}>
@@ -74,18 +84,39 @@ export const NavBar = () => {
           </Link>
           {/* TODO: add scroll animation */}
           <HashLink style={LinkStyle} to="/#about">
-            <li>About</li>
+            <li>About/Resume</li>
           </HashLink>
-          {/* <HashLink to="/#resume">
-                <li>Resume</li>
-              </HashLink> */}
-          <Link style={LinkStyle} to="/photography">
-            <li>Photography</li>
-          </Link>
-          {/* <a href="#">
-                <li>Food</li>
-              </a> */}
+          <li
+            onClick={(event: React.MouseEvent<HTMLLIElement>) =>
+              handleClick(event)
+            }
+            style={LinkStyle}
+          >
+            Photography
+          </li>
+          {/* <Link style={LinkStyle} to="/recipes">
+            <li>Recipes</li>
+          </Link> */}
         </ul>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <Link style={LinkStyle} to="/photography/weddings">
+            <MenuItem onClick={handleClose}>Weddings & Engagements</MenuItem>
+          </Link>
+          <Link style={LinkStyle} to="/photography/portraits">
+            <MenuItem onClick={handleClose}>People & Portraits</MenuItem>
+          </Link>
+          <Link style={LinkStyle} to="/photography/landscape">
+            <MenuItem onClick={handleClose}>Landscape & Things</MenuItem>
+          </Link>
+        </Menu>
       </div>
     );
   }

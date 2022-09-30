@@ -21,7 +21,7 @@ export interface Image {
   fileUrl: string;
   loaded: boolean;
 }
-export type ImageType = "food" | "landscape" | "portraits";
+export type ImageType = "food" | "landscape" | "portraits" | "weddings";
 
 app.use(express.static(DIST_DIR));
 

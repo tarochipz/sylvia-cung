@@ -1,7 +1,7 @@
 import React from "react";
 import { NavBar } from "./navBar";
 import Home from "./pages/home/index";
-import { Photography } from "./pages/photography/index";
+import { Photography } from "./pages/photography";
 import { Routes, Route } from "react-router-dom";
 import { Footer } from "./footer";
 
@@ -28,7 +28,18 @@ export const App = () => {
         <NavBar />
       </div>
       <Routes>
-        <Route path="/photography" element={<Photography />} />
+        <Route
+          path="/photography/weddings"
+          element={<Photography imageType="weddings" />}
+        />
+        <Route
+          path="/photography/portraits"
+          element={<Photography imageType="portraits" />}
+        />
+        <Route
+          path="/photography/landscape"
+          element={<Photography imageType="landscape" />}
+        />
         <Route path="/*" element={<Home />} />
       </Routes>
       <Footer />

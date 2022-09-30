@@ -2,7 +2,7 @@ import React from "react";
 import { Image, ImageType } from "../../../server";
 import { Gallery } from "../../sharedComponents/gallery";
 
-export const Photography = () => {
+export const Photography = ({ imageType }: { imageType: ImageType }) => {
   const [images, setImages] = React.useState([]);
 
   const fetchImages = async (imageType: ImageType) => {
@@ -21,7 +21,7 @@ export const Photography = () => {
   };
 
   React.useEffect(() => {
-    fetchImages("portraits");
+    fetchImages(imageType);
   }, []);
 
   return <Gallery images={images} />;

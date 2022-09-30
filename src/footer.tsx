@@ -26,7 +26,7 @@ export const Footer = () => {
     <div style={footerWrapperStyle} className="footerWrapper">
       <a
         style={footerLinkStyle}
-        href="https://github.com/tarochipz/sylvs_personal_website"
+        href="https://github.com/tarochipz/sylvia-cung"
         target="_blank"
       >
         Designed & built w/ &#x1F495; by Sylvia Cung &#169;{" "}
