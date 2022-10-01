@@ -7,10 +7,10 @@ const htmlPlugin = new HtmlWebPackPlugin({
 const __dirname = path.resolve();
 
 export default {
-  entry: "./src/index.tsx",
+  entry: "/src/index.tsx",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "/[name].js",
+    filename: "[name].js",
   },
   devServer: {
     static: "./dist",
