@@ -1,8 +1,8 @@
 import HtmlWebPackPlugin from "html-webpack-plugin";
 import path from "path";
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: "/src/index.html",
-  filename: "/index.html",
+  template: "./src/index.html",
+  filename: "./index.html",
 });
 const __dirname = path.resolve();
 
