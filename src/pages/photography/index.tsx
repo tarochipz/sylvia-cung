@@ -22,7 +22,7 @@ export const Photography = ({ imageType }: { imageType: ImageType }) => {
 
   React.useEffect(() => {
     fetchImages(imageType);
-  }, []);
+  }, [imageType]);
 
   return <Gallery images={images} />;
 };

@@ -28,18 +28,20 @@ export const App = () => {
         <NavBar />
       </div>
       <Routes>
-        <Route
-          path="/photography/weddings"
-          element={<Photography imageType="weddings" />}
-        />
-        <Route
-          path="/photography/portraits"
-          element={<Photography imageType="portraits" />}
-        />
-        <Route
-          path="/photography/landscape"
-          element={<Photography imageType="landscape" />}
-        />
+        <Route path="/photography">
+          <Route
+            path="weddings"
+            element={<Photography imageType="weddings" />}
+          />
+          <Route
+            path="portraits"
+            element={<Photography imageType="portraits" />}
+          />
+          <Route
+            path="landscape"
+            element={<Photography imageType="landscape" />}
+          />
+        </Route>
         <Route path="/*" element={<Home />} />
       </Routes>
       <Footer />

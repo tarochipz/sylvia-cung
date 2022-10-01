@@ -27,11 +27,11 @@ export const Gallery = ({ images }: { images: Image[] }) => {
           />
         </Box>
       </Modal>
-      {/* <h1 style={{}}>Portraits</h1> */}
       {images && images.length > 0 ? (
-        <Masonry columns={{lg:3, md:2}} spacing={2}>
+        <Masonry columns={{ lg: 3, md: 2 }} spacing={2}>
           {images.map((image) => (
             <GalleryImage
+              key={image.fileName}
               image={image}
               setOpen={setOpen}
               setActiveImage={setActiveImage}
@@ -39,9 +39,9 @@ export const Gallery = ({ images }: { images: Image[] }) => {
           ))}
         </Masonry>
       ) : (
-      <Box sx={{textAlign: 'center', padding: '25%'}}>
-        <CircularProgress sx={{color: 'red'}} />
-      </Box>
+        <Box sx={{ textAlign: "center", padding: "25%" }}>
+          <CircularProgress sx={{ color: "red" }} />
+        </Box>
       )}
     </>
   );
