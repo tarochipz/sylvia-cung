@@ -37,6 +37,7 @@ const LinkStyle = {
   padding: "15px",
   color: "red",
   textDecoration: "none",
+  cursor: "pointer",
   "&:hover": {
     textDecoration: "underline",
     color: "#ff9e9e",

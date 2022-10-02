@@ -1,5 +1,6 @@
 import * as React from "react";
 import ImageListItem from "@mui/material/ImageListItem";
+import Skeleton from "@mui/material/Skeleton";
 import { Image } from "../../server";
 
 export const GalleryImage = ({
@@ -21,6 +22,18 @@ export const GalleryImage = ({
       }}
       key={image.id}
     >
+      <div
+        style={{
+          opacity: loaded ? "0" : "100",
+          display: "flex",
+          alignItems: "center",
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <Skeleton variant="rectangular" width="inherit" height="inherit" />
+      </div>
       <img
         style={{ opacity: loaded ? "100" : "0" }}
         onLoad={() => {

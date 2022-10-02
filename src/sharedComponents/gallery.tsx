@@ -28,7 +28,7 @@ export const Gallery = ({ images }: { images: Image[] }) => {
         </Box>
       </Modal>
       {images && images.length > 0 ? (
-        <Masonry columns={{ lg: 3, md: 2 }} spacing={2}>
+        <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2}>
           {images.map((image) => (
             <GalleryImage
               key={image.fileName}

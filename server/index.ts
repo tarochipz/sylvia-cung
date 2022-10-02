@@ -1,9 +1,9 @@
 import express from "express";
 import path from "path";
 import { Storage } from "@google-cloud/storage";
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 
-dotenv.config()
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 9090;
 const __dirname = path.resolve();
@@ -11,9 +11,9 @@ const DIST_DIR = path.join(__dirname, "./dist");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
 const GCS_BUCKET_NAME = "sylviacung-images";
 
-const projectId = process.env.GCS_PROJECT_ID
+const projectId = process.env.GCS_PROJECT_ID;
 const client_email = process.env.GCS_CLIENT_EMAIL;
-const private_key = process.env.GCS_PRIVATE_KEY.replace(/\\n/g, '\n') //https://github.com/googleapis/google-cloud-node/issues/1173#issuecomment-199183259
+const private_key = process.env.GCS_PRIVATE_KEY.replace(/\\n/g, "\n"); //https://github.com/googleapis/google-cloud-node/issues/1173#issuecomment-199183259
 
 export interface Image {
   id: string;
