@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -8,6 +10,27 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 //@ts-ignore
 import { HashLink } from "react-router-hash-link";
+
+const NavItemStyle = `
+  padding: 15px;
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: #ff9e9e;
+  },
+`;
+const StyledHashLink = styled(HashLink)`
+  ${NavItemStyle}
+`;
+
+const StyledLink = styled(Link)`
+  ${NavItemStyle}
+`;
+
+const StyledLi = styled.li`
+  ${NavItemStyle}
+`;
 
 const IconStyle = {
   transition: "transform 1s",
@@ -31,17 +54,6 @@ const MenuStyle = {
   margin: "0",
   padding: "0",
   marginLeft: "auto",
-};
-
-const LinkStyle = {
-  padding: "15px",
-  color: "red",
-  textDecoration: "none",
-  cursor: "pointer",
-  "&:hover": {
-    textDecoration: "underline",
-    color: "#ff9e9e",
-  },
 };
 
 const LogoStyle = {
@@ -80,21 +92,20 @@ export const NavBar = () => {
         </div>
         {/* @ts-ignore */}
         <ul style={MenuStyle}>
-          <Link style={LinkStyle} to="/">
+          <StyledLink to="/">
             <li>Home</li>
-          </Link>
+          </StyledLink>
           {/* TODO: add scroll animation */}
-          <HashLink style={LinkStyle} to="/#about">
+          <StyledHashLink to="/#about">
             <li>About/Resume</li>
-          </HashLink>
-          <li
+          </StyledHashLink>
+          <StyledLi
             onClick={(event: React.MouseEvent<HTMLLIElement>) =>
               handleClick(event)
             }
-            style={LinkStyle}
           >
             Photography
-          </li>
+          </StyledLi>
           {/* <Link style={LinkStyle} to="/recipes">
             <li>Recipes</li>
           </Link> */}
@@ -108,15 +119,15 @@ export const NavBar = () => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <Link style={LinkStyle} to="/photography/weddings">
+          <StyledLink to="/photography/weddings">
             <MenuItem onClick={handleClose}>Weddings & Engagements</MenuItem>
-          </Link>
-          <Link style={LinkStyle} to="/photography/portraits">
+          </StyledLink>
+          <StyledLink to="/photography/portraits">
             <MenuItem onClick={handleClose}>People & Portraits</MenuItem>
-          </Link>
-          <Link style={LinkStyle} to="/photography/landscape">
+          </StyledLink>
+          <StyledLink to="/photography/landscape">
             <MenuItem onClick={handleClose}>Landscape & Things</MenuItem>
-          </Link>
+          </StyledLink>
         </Menu>
       </div>
     );
