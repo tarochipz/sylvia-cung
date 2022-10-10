@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -26,6 +25,13 @@ const StyledHashLink = styled(HashLink)`
 
 const StyledLink = styled(Link)`
   ${NavItemStyle}
+`;
+
+const StyledMenuLink = styled(Link)`
+  padding: 15px;
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
 `;
 
 const StyledLi = styled.li`
@@ -119,15 +125,15 @@ export const NavBar = () => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <StyledLink to="/photography/weddings">
+          <StyledMenuLink to="/photography/weddings">
             <MenuItem onClick={handleClose}>Weddings & Engagements</MenuItem>
-          </StyledLink>
-          <StyledLink to="/photography/portraits">
+          </StyledMenuLink>
+          <StyledMenuLink to="/photography/portraits">
             <MenuItem onClick={handleClose}>People & Portraits</MenuItem>
-          </StyledLink>
-          <StyledLink to="/photography/landscape">
+          </StyledMenuLink>
+          <StyledMenuLink to="/photography/landscape">
             <MenuItem onClick={handleClose}>Landscape & Things</MenuItem>
-          </StyledLink>
+          </StyledMenuLink>
         </Menu>
       </div>
     );

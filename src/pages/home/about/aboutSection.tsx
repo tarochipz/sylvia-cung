@@ -1,11 +1,33 @@
 import React from "react";
-import "./aboutSection.css";
+import styled from "@emotion/styled";
+
+const StyledDiv = styled.div`
+  width: 60%;
+  float: left;
+  padding: 10px;
+  color: red;
+  font-family: "Inconsolata", monospace;
+`;
+
+const StyledImg = styled.img`
+  width: 20%;
+  border-radius: 50%;
+  float: left;
+  padding: 2%;
+`;
+
+const Wrapper = styled.div`
+  margin: auto;
+  padding: 10px;
+  border: 1px solid red;
+  overflow: hidden;
+`;
 
 export const AboutSection = () => {
   return (
-    <div id="about" className="aboutSectionWrapper">
-      <img src="https://i.imgur.com/zbHawOo.jpg?2" />
-      <div className="text">
+    <Wrapper id="about">
+      <StyledImg src="https://i.imgur.com/zbHawOo.jpg?2" />
+      <StyledDiv>
         <h2>About Me</h2>
         <p>I'm a self-taught Full Stack Engineer based in San Francisco.</p>
         <p>
@@ -25,7 +47,7 @@ export const AboutSection = () => {
           photography, creating food and cocktail recipes, travelling to new
           places, and attending music festivals.
         </p>
-      </div>
-    </div>
+      </StyledDiv>
+    </Wrapper>
   );
 };
