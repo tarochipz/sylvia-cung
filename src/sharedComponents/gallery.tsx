@@ -21,10 +21,7 @@ export const Gallery = ({ images }: { images: Image[] }) => {
     <>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={{ ...style }}>
-          <img
-            style={{ width: "100%", height: "100%" }}
-            src={activeImage?.fileUrl}
-          />
+          <img style={{ maxHeight: "85vh" }} src={activeImage?.fileUrl} />
         </Box>
       </Modal>
       {images && images.length > 0 ? (
