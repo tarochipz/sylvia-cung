@@ -17,11 +17,17 @@ const private_key = process.env.GCS_PRIVATE_KEY.replace(/\\n/g, "\n"); //https:/
 
 export interface Image {
   id: string;
+  customMetadata?: Record<string, string>;
   fileName: string;
   fileUrl: string;
   loaded: boolean;
 }
-export type ImageType = "food" | "landscape" | "portraits" | "weddings";
+export type ImageType =
+  | "food"
+  | "landscape"
+  | "portraits"
+  | "weddings"
+  | "coffee";
 
 app.use(express.static(DIST_DIR));
 
@@ -43,6 +49,7 @@ app.get("/api/photos", async (req: express.Request, res: express.Response) => {
   files.forEach((file: any) => {
     const imageData: Image = {
       id: file.metadata.id,
+      customMetadata: file.metadata?.metadata,
       fileName: file.name,
       fileUrl: `https://storage.googleapis.com/sylviacung-images/${file.name}`,
       loaded: false,

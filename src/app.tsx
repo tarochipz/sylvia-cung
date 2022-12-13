@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import WebFont from "webfontloader";
 import { NavBar } from "./navBar";
 import Home from "./pages/home/index";
 import { Photography } from "./pages/photography";
-import { Routes, Route } from "react-router-dom";
 import { Footer } from "./footer";
 
 const HomepageWrapperStyle = {
@@ -20,6 +21,14 @@ const NavStyle = {
 };
 
 export const App = () => {
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Inconsolata"],
+      },
+    });
+  }, []);
+
   return (
     // @ts-ignore
     <div style={HomepageWrapperStyle}>
@@ -40,6 +49,13 @@ export const App = () => {
           <Route
             path="landscape"
             element={<Photography imageType="landscape" />}
+          />
+        </Route>
+        <Route path="/travel">
+          <Route path="coffee" element={<Photography imageType="coffee" />} />
+          <Route
+            path="asia"
+            // element={<Photography imageType="portraits" />}
           />
         </Route>
         <Route path="/*" element={<Home />} />

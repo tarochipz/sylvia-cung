@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "@emotion/styled";
 import "./resumeSection.css";
 import { data } from "./data";
 
@@ -7,6 +8,47 @@ interface ResumeData {
   date: string;
   jobDescription: string[];
 }
+
+const Wrapper = styled.div`
+  overflow: hidden;
+  padding-bottom: 30px;
+  font-family: "Raleway", sans-serif;
+  color: #0157b8;
+`;
+
+const Timeline = styled.ul`
+  font-family: "Inconsolata", monospace;
+  color: #6593e1;
+  list-style-type: none;
+  text-align: right;
+  width: 30%;
+  float: left;
+  padding-inline-start: 0px;
+`;
+//@ts-ignore
+const TimelineItem = styled.li`
+  font-weight: ${(props) => (props.isActive ? "bold" : "")};
+  padding: 10px;
+  border-right: 3px solid #6593e1;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(59, 137, 255, 0.1);
+  }
+`;
+
+const TimelineDetails = styled.div`
+  font-family: "Inconsolata", monospace;
+  color: #0157b8;
+  margin: 10px;
+  float: left;
+  width: 60%;
+  h3 {
+    margin-block-end: 0.3em;
+  }
+  h4 {
+    margin-block-start: 0;
+  }
+`;
 
 export const ResumeSection = () => {
   const [resumeData, setResumeData] = React.useState<ResumeData>(data[0]);
@@ -22,22 +64,23 @@ export const ResumeSection = () => {
   };
 
   return (
-    <div id="resume" className="resumeSectionWrapper">
+    <Wrapper id="resume">
       <h2>Work Experience</h2>
-      <ul className="timeline">
+      <Timeline>
         {data.map((entry, index) => {
           return (
-            <li
-              className={active === index ? "active" : ""}
+            <TimelineItem
+              //@ts-ignore
+              isActive={active === index}
               key={index}
               onClick={() => handleClick(index)}
             >
               {entry.company}
-            </li>
+            </TimelineItem>
           );
         })}
-      </ul>
-      <div className="timelineDetails">
+      </Timeline>
+      <TimelineDetails>
         <h3>{resumeData?.jobTitle}</h3>
         <h4>{resumeData?.date}</h4>
         <ul>
@@ -45,7 +88,7 @@ export const ResumeSection = () => {
             return <li>{entry}</li>;
           })}
         </ul>
-      </div>
-    </div>
+      </TimelineDetails>
+    </Wrapper>
   );
 };
