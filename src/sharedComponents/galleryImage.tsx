@@ -1,5 +1,6 @@
 import * as React from "react";
 import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
 import Skeleton from "@mui/material/Skeleton";
 import { Image } from "../../server";
 
@@ -42,6 +43,15 @@ export const GalleryImage = ({
         src={image.fileUrl}
         alt={image.fileName}
         loading="lazy"
+      />
+      <ImageListItemBar
+        position="below"
+        title={
+          image.customMetadata &&
+          `${image.customMetadata.description ?? ""} - ${
+            image.customMetadata.location ?? ""
+          }`
+        }
       />
     </ImageListItem>
   );
